@@ -9,6 +9,8 @@
   tool = Kaleidoscope
 [alias]
   dt = difftool
+  dw = diff --word-diff
+  ss = status -sb
 [apply]
   whitespace = fix
 [core]
