@@ -7,7 +7,7 @@ export MANPAGER="less -X"
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 
-export PATH=$PATH:~/bin:~/local/bin:/Applications/MAMP/Library/bin/:/Users/neil/node_modules/.bin
+export PATH=/Applications/MacVim.app/Contents/MacOS:$PATH:~/bin:~/local/bin:/Applications/MAMP/Library/bin/:/Users/neil/node_modules/.bin
 export NODE_PATH=/usr/local/lib/node_modules
 
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/

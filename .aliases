@@ -4,6 +4,8 @@ alias ...="cd ../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
+alias vi="vim"
+
 # List all files colorized in long format, including dot files
 alias la="ls -Gla"
 alias ls='ls -G'
