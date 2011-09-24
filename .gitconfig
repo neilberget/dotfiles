@@ -11,8 +11,27 @@
   dt = difftool
   dw = diff --word-diff
   ss = status -sb
+  l = log --graph --abbrev-commit --date=relative
+  head = !git l -1
+  aa = add --all
+  st = status
+  ci = commit
+  co = checkout
+  di = diff
+  dc = diff --cached
+  amend = commit --amend
+  r = !git --no-pager l -20
+  ra = !git r --all
+  ff = merge --ff-only
+  pullff = pull --ff-only
+  noff = merge --no-ff
+  la = !git l  --all
+  pom = push origin master
+  b = branch
 [apply]
   whitespace = fix
+[format]
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
 [core]
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
