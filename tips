@@ -67,3 +67,21 @@ total 12K
    0 drwxr-xr-x+ 4 Administrator None    0 Jul 21 23:39 .gem
 4.0K -rwxr-xr-x  1 Administrator None 1.5K Jul 21 23:34 .inputrc
 Here, the command was the ^-al^-lash which replaced the –al with –lash in our previous ls command and re-ran the command again.
+
+
+
+VIM Commands
+Ctrl-D - Scroll down half a page
+Ctrl-U - Scroll up half a page
+H - Jump to top of visible screen
+M -         middle
+L -         last
+gg - go to first line of file
+G - go to last line of file
+* - highlight current word in file and jump to next match
+n - next search match
+N - previous search match
+
+Command Mode
+% - refers to current open file
+:sh - drop to shell, exit to return to vim

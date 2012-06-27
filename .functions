@@ -18,3 +18,21 @@ digga() {
 title () {
   echo -ne '\033]0;'"$@"'\a';
 }
+
+# Compile all *.coffee files and combine into provided output file
+csc () {
+  find . -name "*.coffee" | xargs coffee --join "$@.js" --compile
+}
+
+# scptar myfile neil@example.com
+# tar czf $1 | ssh $2 "tar xz"
+scptar () {
+ echo "$1"
+ echo "$2"
+ tar czv "$1" | ssh "$2" "tar xz"
+ #cd && tar czv src | ssh example.com "tar xz"
+}
+
+function todo() { if [ $# == "0" ]; then cat $TODO; else echo "• $@" >> $TODO; fi }
+
+function todone() { sed -i -e "/$*/d" $TODO; }

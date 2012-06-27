@@ -21,24 +21,24 @@ else
 endif
 
 " Make the current window big, but leave others context
-set winwidth=84
+"set winwidth=84
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
-set winheight=5
-set winminheight=5
-set winheight=999
+"set winheight=5
+"set winminheight=5
+"set winheight=999
 
 set autoindent " Copy indent from last line when starting new line.
 set backspace=indent,eol,start
 set cursorline " Highlight current line
 set expandtab " Expand tabs to spaces
-set foldcolumn=4 " Column to show folds
-set foldenable
-set foldlevel=2
-set foldmethod=syntax " Markers are used to specify folds.
-set foldminlines=0 " Allow folding single lines
-set foldnestmax=3 " Set max fold nesting level
+# set foldcolumn=4 " Column to show folds
+# set foldenable
+# set foldlevel=2
+# set foldmethod=syntax " Markers are used to specify folds.
+# set foldminlines=0 " Allow folding single lines
+# set foldnestmax=3 " Set max fold nesting level
 set formatoptions+=1 " Break before 1-letter words
 set formatoptions+=2 " Use indent from 2nd line of a paragraph
 set formatoptions+=c " Format comments
@@ -69,6 +69,7 @@ set softtabstop=2 " Tab key results in 2 spaces
 set tabstop=2 
 set title " Show the filename in the window titlebar.
 set visualbell
+set wildignore+=*.o,*.obj,.git,system/application/libraries/wurfl/**
 set wildmenu " Hitting TAB in command mode will show possible completions above command line.
 set wildmode=longest,list
 " set undofile " Persistent Undo.
@@ -81,6 +82,9 @@ set statusline=[%n]\ %1*%<%.99t%*\ %2*%h%w%m%r%*%y[%{&ff}→%{strlen(&fenc)?&fen
 " Speed up viewport scrolling
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+
+vnoremap < <gv
+vnoremap > >gv
 
 " Hit enter to hide search
 :nnoremap <CR> :nohlsearch<cr>
@@ -166,3 +170,27 @@ function! InsertSnippetWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
+
+function! ExtractVariable()
+  let name = input("Variable name: ")
+  if name == ''
+    return
+  endif
+  " Enter visual mode (not sure why this is needed
+  " since we're already in
+  " visual mode anyway)
+  normal! gv
+  
+  " Replace selected text with the
+  " variable name
+  exec "normal c" . name
+                            "                     " Define the variable on the
+                            "                     line above
+  exec "normal! O" . name . " = "
+  "                             " Paste the original
+  "                             selected text to be
+  "                             the variable value
+  normal! $p
+endfunction
+
+map <leader>t :! bundle exec rspec %<cr>

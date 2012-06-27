@@ -66,3 +66,8 @@ alias mdump='alias|grep -e "alias g[0-9]"|grep -v "alias m" > ~/.bookmarks'
 alias lma='alias | grep -e "alias g[0-9]"|grep -v "alias m"|sed "s/alias //"'
 touch ~/.bookmarks
 source ~/.bookmarks
+
+# grep recursively through all files in current folder and children folders
+alias findgrep='find . -type f | xargs grep -n --color'
+
+
