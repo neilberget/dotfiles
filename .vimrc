@@ -7,7 +7,7 @@ let mapleader=","
 set t_Co=256
 set background=dark 
 syntax on
-" colorscheme molokai
+colorscheme solarized
 
 " Local dirs
 set backupdir=~/.vim/backups
@@ -19,6 +19,12 @@ if has('gui_running')
 else
 	set background=dark
 endif
+
+" Hit F2 before pasting (and after) to avoid
+" auto-indent causing problems in terminal vim
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 " Make the current window big, but leave others context
 "set winwidth=84
@@ -33,12 +39,12 @@ set autoindent " Copy indent from last line when starting new line.
 set backspace=indent,eol,start
 set cursorline " Highlight current line
 set expandtab " Expand tabs to spaces
-# set foldcolumn=4 " Column to show folds
-# set foldenable
-# set foldlevel=2
-# set foldmethod=syntax " Markers are used to specify folds.
-# set foldminlines=0 " Allow folding single lines
-# set foldnestmax=3 " Set max fold nesting level
+" set foldcolumn=4 " Column to show folds
+" set foldenable
+" set foldlevel=2
+" set foldmethod=syntax " Markers are used to specify folds.
+" set foldminlines=0 " Allow folding single lines
+" set foldnestmax=3 " Set max fold nesting level
 set formatoptions+=1 " Break before 1-letter words
 set formatoptions+=2 " Use indent from 2nd line of a paragraph
 set formatoptions+=c " Format comments
@@ -69,7 +75,7 @@ set softtabstop=2 " Tab key results in 2 spaces
 set tabstop=2 
 set title " Show the filename in the window titlebar.
 set visualbell
-set wildignore+=*.o,*.obj,.git,system/application/libraries/wurfl/**
+set wildignore+=*.o,*.obj,.git,application/libraries/wurfl/**
 set wildmenu " Hitting TAB in command mode will show possible completions above command line.
 set wildmode=longest,list
 " set undofile " Persistent Undo.
@@ -89,7 +95,7 @@ vnoremap > >gv
 " Hit enter to hide search
 :nnoremap <CR> :nohlsearch<cr>
 
-syntax on
+" syntax on
 filetype on
 filetype plugin on
 filetype indent on
@@ -124,11 +130,11 @@ let g:CommandTMaxFiles=20000
 " let g:CommandTMaxHeight=12
 let g:CommandTCancelMap=['<Esc>', '<C-c>']
 " Open files with <leader>f
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+"" map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 " Open files, limited to the directory of the current file, with <leader>gf
 " This requires the %% mapping found below.
 " Custom Rails-specific Command-T mappings
-map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
+""map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
 " map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
 " map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
 " map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
@@ -136,6 +142,11 @@ map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
 " map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
 " map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
 " map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets<cr>
+
+" Ctrl-P
+let g:ctrlp_map = '<leader>f'  " Leave this empty to disable the default mapping
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 0
 
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
@@ -193,4 +204,4 @@ function! ExtractVariable()
   normal! $p
 endfunction
 
-map <leader>t :! bundle exec rspec %<cr>
+" map <leader>t :! bundle exec rspec %<cr>
