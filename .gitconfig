@@ -1,14 +1,15 @@
 [user]
-  name = Neil Berget
+	name = Neil Berget
   email = neil.berget@gmail.com
 [difftool "Kaleidoscope"]
-  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
-  prompt = false
+	prompt = false
 [diff]
-  tool = Kaleidoscope
+	tool = Kaleidoscope
 [alias]
   dt = difftool
+  mt = mergetool
   dw = diff --word-diff
   ss = status -sb
   l = log --graph --abbrev-commit --date=relative
@@ -36,8 +37,9 @@
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
   whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+	autocrlf = input
 [color]
-  ui = auto
+	ui = always
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -51,8 +53,11 @@
   added = yellow
   changed = green
   untracked = cyan
+[push]
+  default = simple
 [merge]
   log = true
+	tool = Kaleidoscope
 [url "git@github.com:"]
   insteadOf = "gh:"
   pushInsteadOf = "github:"
@@ -65,3 +70,8 @@
   pushInsteadOf = "git://gist.github.com/"
 [url "git://gist.github.com/"]
   insteadOf = "gist:"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false

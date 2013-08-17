@@ -36,3 +36,41 @@ scptar () {
 function todo() { if [ $# == "0" ]; then cat $TODO; else echo "• $@" >> $TODO; fi }
 
 function todone() { sed -i -e "/$*/d" $TODO; }
+
+# grep recursively through all files in current folder and children folders
+function grepr() { grep -rn --color "$1" .; }
+
+function gh_project() {
+  cat .git/config  | grep url | cut -d: -f2 - | cut -d. -f1
+}
+
+function ghc() { 
+  project=`cat .git/config  | grep url | cut -d: -f2 - | cut -d. -f1`
+  open "https://github.com/$project/compare/$1...master"; 
+}
+
+function g! { grep -nr --exclude=.git --exclude=.hg --exclude=.svn --include="*.$1" "$2" ${3-"."} --colour; }
+
+function simple_prompt {
+ export PS1="\[\]\u \[\]at \[\]\h \[\]in \[\]\w\[\]\n$ "
+}
+
+function pr () {
+  local base=$1
+  if [ -z "$1" ]; then
+    base="master"
+  fi
+  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*github.com[:/]\(.*\)\.git.*/\1/"`
+  local branch=`git name-rev --name-only HEAD`
+  echo "... creating pull request for branch \"$branch\" to \"$base\" in \"$repo\""
+  open https://github.com/$repo/compare/$base...$branch
+}
+
+export -f pr
+
+function fpr () {
+  echo git fetch origin pull/$1/head:pr$1
+  git fetch origin pull/$1/head:pr$1
+  echo git checkout pr$1
+  git checkout pr$1
+}

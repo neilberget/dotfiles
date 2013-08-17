@@ -67,7 +67,26 @@ alias lma='alias | grep -e "alias g[0-9]"|grep -v "alias m"|sed "s/alias //"'
 touch ~/.bookmarks
 source ~/.bookmarks
 
-# grep recursively through all files in current folder and children folders
-alias findgrep='find . -type f | xargs grep -n --color'
+# Sort by time descending
+alias lt="ls -lat"
 
+alias sds="(cd /Users/neil/Projects/edmodo/cloud/ && ./start-dev-servers.sh)"
 
+alias delstratus="sudo rm -rf /Applications/Stratus\ Data\ Connector.app/ /Library/Application\ Support/Stratus/ ~/Library/Caches/OpenJNLP"
+
+# git shortcuts
+alias gba='git branch -a'
+
+# grep
+alias gr='grep --color=auto -nr'
+
+# stratus
+alias slog1="ssh prod-auth-http-1 \"tail -F /var/log/stratus-auth_cloud/auth.log | grep --line-buffered 'got response' | awk '{ print \\\$13, \\\$12, \\\$15; fflush() }'\""
+alias slog2="ssh prod-auth-http-2 \"tail -F /var/log/stratus-auth_cloud/auth.log | grep --line-buffered 'got response' | awk '{ print \\\$13, \\\$12, \\\$15; fflush() }'\""
+alias slog3="ssh prod-auth-http-3 \"tail -F /var/log/stratus-auth_cloud/auth.log | grep --line-buffered 'got response' | awk '{ print \\\$13, \\\$12, \\\$15; fflush() }'\""
+
+alias h2="(cd ~/Projects/edmodo/stratus-admin/lib/public/jars && java -jar h2.jar)"
+
+alias sha256='shasum -a 256' # "sha256 myfile"
+
+alias server='python -m SimpleHTTPServer'
